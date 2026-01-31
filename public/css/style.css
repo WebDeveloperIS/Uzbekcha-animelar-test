@@ -192,8 +192,11 @@ footer {
     text-align: center;
     padding: 20px;
     background-color: #1f1f2e;
-    margin-top: 40px;
+    margin-top: auto;
     color: #aaa;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 /* ===== Responsive ===== */
