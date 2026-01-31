@@ -1,33 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Edit Anime</title>
-<link rel="stylesheet" href="/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Anime</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
 
-<header>
-  <h1>Edit Anime</h1>
-  <nav>
-    <a href="/admin" class="btn">Back to Admin</a>
-    <a href="/logout" class="btn">Logout</a>
-  </nav>
-</header>
+    <header>
+        <h1>Edit Anime</h1>
+        <nav>
+            <a href="/admin" class="btn">Back to Admin</a>
+            <a href="/logout" class="btn">Logout</a>
+        </nav>
+    </header>
 
-<div class="container">
-<form action="/admin/edit/<%= anime.id %>" method="POST" enctype="multipart/form-data">
-  <input type="text" name="title" value="<%= anime.title %>" placeholder="Anime title" required>
-  <input type="file" name="video" accept="video/*">
-  <input type="text" name="youtube" placeholder="YouTube URL" value="<%= anime.video && anime.video.startsWith('http') ? anime.video : '' %>">
-  <button type="submit">Save Changes</button>
-</form>
-</div>
+    <div class="container">
+        <form action="/admin/edit/<%= anime.id %>" method="POST" enctype="multipart/form-data">
+            <div class="cf">
+                <div class="cf-in">
+                    <input type="text" name="title" value="<%= anime.title %>" placeholder="Anime title" required>
+                    <input type="file" name="video" accept="video/*">
+                    <input type="text" name="youtube" placeholder="YouTube URL"
+                        value="<%= anime.video && anime.video.startsWith('http') ? anime.video : '' %>">
+                    <button type="submit">Save Changes</button>
+                </div>
+            </div>
+        </form>
+    </div>
 
-<footer>
-  &copy; 2026 Anime Hub. All rights reserved.
-</footer>
+    <footer>
+        &copy; 2026 Anime Hub. All rights reserved.
+    </footer>
 
 </body>
+
 </html>
