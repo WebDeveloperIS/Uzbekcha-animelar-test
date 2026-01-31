@@ -10,7 +10,7 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 
 // Static files
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 // Session
@@ -20,10 +20,10 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// Multer
+// Multer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "public/uploads"));
+    cb(null, path.join(__dirname, "public/uploads")); // uploads papka
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + path.extname(file.originalname));
@@ -32,13 +32,16 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-app.post("/uploads", upload.single("video"), (req, res) => {
-  res.redirect("/");
-});
-
 // Middleware
-function checkAuth(req, res, next) { if (req.session.user) next(); else res.redirect('/login'); }
-function checkAdmin(req, res, next) { if (req.session.user && req.session.user.role === 'admin') next(); else res.redirect('/login'); }
+function checkAuth(req, res, next) { 
+    if (req.session.user) next(); 
+    else res.redirect('/login'); 
+}
+
+function checkAdmin(req, res, next) { 
+    if (req.session.user && req.session.user.role === 'admin') next(); 
+    else res.redirect('/login'); 
+}
 
 // Register
 app.get('/register', (req, res) => res.render('register', { error: null }));
@@ -65,7 +68,10 @@ app.post('/login', (req, res) => {
 });
 
 // Logout
-app.get('/logout', (req, res) => { req.session.destroy(); res.redirect('/login'); });
+app.get('/logout', (req, res) => { 
+    req.session.destroy(); 
+    res.redirect('/login'); 
+});
 
 // Foydalanuvchi sahifa
 app.get('/', checkAuth, (req, res) => {
@@ -91,14 +97,19 @@ app.get('/admin/edit/:id', checkAdmin, (req, res) => {
     const id = req.params.id;
     db.get("SELECT * FROM animes WHERE id=?", [id], (err, row) => res.render('edit_anime', { anime: row }));
 });
+
 app.post('/admin/edit/:id', checkAdmin, upload.single('video'), (req, res) => {
     const id = req.params.id;
     const title = req.body.title;
     let sql = "UPDATE animes SET title=?";
     const params = [title];
+
     if (req.file) { sql += ", video=?"; params.push(req.file.filename); }
-    if (req.body.youtube) { sql += ", video=?"; params.push(req.body.youtube); }
-    sql += " WHERE id=?"; params.push(id);
+    else if (req.body.youtube) { sql += ", video=?"; params.push(req.body.youtube); }
+
+    sql += " WHERE id=?"; 
+    params.push(id);
+
     db.run(sql, params, () => res.redirect('/admin'));
 });
 
@@ -106,9 +117,9 @@ app.get('/admin/delete/:id', checkAdmin, (req, res) => {
     const id = req.params.id;
     db.run("DELETE FROM animes WHERE id=?", [id], () => res.redirect('/admin'));
 });
-app.get("/", (req, res) => {
-    res.render("index"); // yoki res.send("OK")
-});
+
+// Bu route olib tashlandi, / endpoint yuqorida mavjud
+// app.get("/", (req, res) => { res.render("index"); });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
