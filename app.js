@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const bcrypt = require('bcrypt');
+const multer = require("multer");
 const db = require('./db');
 
 const app = express();
@@ -10,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Static files
 app.use(express.static('public'));
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 // Session
 app.use(session({
@@ -20,8 +21,6 @@ app.use(session({
 }));
 
 // Multer
-const multer = require("multer");
-
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, path.join(__dirname, "public/uploads"));
