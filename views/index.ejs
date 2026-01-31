@@ -7,14 +7,13 @@
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+
 <header>
   <h1>Anime Hub</h1>
   <nav>
     <a href="/">Home</a>
-    <% if(user.role==='admin'){ %>
-      <a href="/admin" class="btn">Admin</a>
-    <% } %>
-    <a href="/logout" class="btn">Logout</a>
+    <% if(user && user.role==='admin'){ %><a href="/admin" class="btn">Admin</a><% } %>
+    <% if(user){ %><a href="/logout" class="btn">Logout</a><% } else { %><a href="/login" class="btn">Login</a><% } %>
   </nav>
 </header>
 
@@ -43,5 +42,6 @@
 <footer>
   &copy; 2026 Anime Hub. All rights reserved.
 </footer>
+
 </body>
 </html>

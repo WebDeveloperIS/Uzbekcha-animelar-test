@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+
 <header>
   <h1>Admin Panel</h1>
   <nav>
@@ -17,31 +18,32 @@
 </header>
 
 <div class="container">
-<table>
-<tr><th>Title</th><th>Video</th><th>Actions</th></tr>
-<% animes.forEach(a=>{ %>
-<tr>
-  <td><%= a.title %></td>
-  <td>
-    <% if(a.video && !a.video.startsWith('http')){ %>
-      <video width="150" controls>
-        <source src="/uploads/<%= a.video %>" type="video/mp4">
-      </video>
-    <% } else if(a.video){ %>
-      <a href="<%= a.video %>" class="btn">YouTube Link</a>
-    <% } %>
-  </td>
-  <td>
-    <a href="/admin/edit/<%= a.id %>" class="btn">Edit</a>
-    <a href="/admin/delete/<%= a.id %>" class="btn" onclick="return confirm('Are you sure?')">Delete</a>
-  </td>
-</tr>
-<% }) %>
-</table>
+  <table>
+    <tr><th>Title</th><th>Video</th><th>Actions</th></tr>
+    <% animes.forEach(a => { %>
+      <tr>
+        <td><%= a.title %></td>
+        <td>
+          <% if(a.video && !a.video.startsWith('http')){ %>
+            <video width="150" controls>
+              <source src="/uploads/<%= a.video %>" type="video/mp4">
+            </video>
+          <% } else if(a.video){ %>
+            <a href="<%= a.video %>" class="btn">YouTube Link</a>
+          <% } %>
+        </td>
+        <td>
+          <a href="/admin/edit/<%= a.id %>" class="btn">Edit</a>
+          <a href="/admin/delete/<%= a.id %>" class="btn" onclick="return confirm('Are you sure?')">Delete</a>
+        </td>
+      </tr>
+    <% }) %>
+  </table>
 </div>
 
 <footer>
   &copy; 2026 Anime Hub. All rights reserved.
 </footer>
+
 </body>
 </html>
