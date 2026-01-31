@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Edit Anime</title>
-<link rel="stylesheet" href="/style.css">
+    <title>Edit Anime</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
+
 <body>
-<h2>Tahrirlash</h2>
-<form method="post" enctype="multipart/form-data">
-<input type="text" name="title" value="<%= anime.title %>" required>
-Video: <%= anime.video %><br>
-<input type="file" name="video" accept="video/*">
-Yoki YouTube link: <input type="text" name="youtube" placeholder="https://youtube.com/...">
-<button>Saqlash</button>
-</form>
-<a href="/admin">Orqaga</a>
+    <h2>Tahrirlash</h2>
+    <form method="post" enctype="multipart/form-data">
+        <input type="text" name="title" value="<%= anime.title %>" required>
+        Video: <%= anime.video %><br>
+            <input type="file" name="video" accept="video/*">
+            Yoki YouTube link: <input type="text" name="youtube" placeholder="https://youtube.com/...">
+            <button>Saqlash</button>
+    </form>
+    <a href="/admin">Orqaga</a>
 </body>
+
 </html>

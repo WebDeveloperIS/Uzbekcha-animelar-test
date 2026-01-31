@@ -18,9 +18,9 @@ db.serialize(() => {
     )`);
 
     const hash = bcrypt.hashSync('1234', 10);
-    db.get("SELECT * FROM users WHERE username='admin'", (err,row)=>{
-        if(!row){
-            db.run("INSERT INTO users (username,password,role) VALUES ('admin',?, 'admin')",[hash]);
+    db.get("SELECT * FROM users WHERE username='admin'", (err, row) => {
+        if (!row) {
+            db.run("INSERT INTO users (username,password,role) VALUES ('admin',?, 'admin')", [hash]);
         }
     });
 });
