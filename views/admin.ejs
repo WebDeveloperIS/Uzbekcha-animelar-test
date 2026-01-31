@@ -5,30 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Panel</title>
 <link rel="stylesheet" href="/public/style.css">
-
 </head>
 <body>
 <header>
   <h1>Admin Panel</h1>
   <nav>
-    <a href="/">Home</a>
+    <a href="/" class="btn">Home</a>
     <a href="/admin/add" class="btn">Add Anime</a>
-    <a href="/logout">Logout</a>
+    <a href="/logout" class="btn">Logout</a>
   </nav>
 </header>
 
 <div class="container">
 <table>
 <tr><th>Title</th><th>Video</th><th>Actions</th></tr>
-<% animes.forEach(a => { %>
+<% animes.forEach(a=>{ %>
 <tr>
   <td><%= a.title %></td>
   <td>
-    <% if(a.video && !a.video.startsWith('http')) { %>
+    <% if(a.video && !a.video.startsWith('http')){ %>
       <video width="150" controls>
         <source src="/uploads/<%= a.video %>" type="video/mp4">
       </video>
-    <% } else if(a.video) { %>
+    <% } else if(a.video){ %>
       <a href="<%= a.video %>" class="btn">YouTube Link</a>
     <% } %>
   </td>

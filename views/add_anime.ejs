@@ -16,18 +16,12 @@
 </header>
 
 <div class="container">
-  <form action="/admin/add" method="POST" enctype="multipart/form-data">
-    <label for="title">Title:</label>
-    <input type="text" name="title" id="title" placeholder="Enter anime title" required>
-
-    <label for="video">Upload Video (optional):</label>
-    <input type="file" name="video" id="video" accept="video/*">
-
-    <label for="youtube">Or YouTube URL:</label>
-    <input type="text" name="youtube" id="youtube" placeholder="https://www.youtube.com/...">
-
-    <button type="submit">Add Anime</button>
-  </form>
+<form action="/admin/add" method="POST" enctype="multipart/form-data">
+  <input type="text" name="title" placeholder="Anime title" required>
+  <input type="file" name="video" accept="video/*">
+  <input type="text" name="youtube" placeholder="YouTube URL">
+  <button type="submit">Add Anime</button>
+</form>
 </div>
 
 <footer>

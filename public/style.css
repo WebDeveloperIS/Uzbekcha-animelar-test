@@ -1,28 +1,27 @@
 /* ======== General ======== */
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-body { background-color: #1e1e2f; color: #fff; line-height: 1.6; }
+body { background-color: #0d1117; color: #c9d1d9; line-height: 1.6; }
 
 /* ======== Header ======== */
 header {
-    background-color: #2b2b3f;
+    background: linear-gradient(90deg, #1f2937, #111827);
     padding: 20px;
     text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.5);
 }
 header h1 {
-    color: #ff6f61;
-    font-size: 2rem;
+    color: #ff4c29;
+    font-size: 2.2rem;
     margin-bottom: 10px;
 }
 nav a {
-    color: #fff;
+    color: #c9d1d9;
     margin: 0 15px;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s;
 }
-nav a:hover {
-    color: #ff6f61;
-}
+nav a:hover { color: #ff4c29; }
 
 /* ======== Container ======== */
 .container {
@@ -31,64 +30,80 @@ nav a:hover {
     padding: 0 20px;
 }
 
-/* ======== Anime Cards ======== */
+/* ======== Anime Grid ======== */
 .anime-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
 }
 .anime-card {
-    background-color: #2b2b3f;
+    background-color: #161b22;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 .anime-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-}
-.anime-card video, .anime-card img {
-    width: 100%;
-    border-bottom: 1px solid #444;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.8);
 }
 .anime-card h3 {
-    padding: 10px;
-    font-size: 1.2rem;
+    padding: 12px;
+    font-size: 1.3rem;
     text-align: center;
+    color: #ff6f61;
 }
+.anime-card video {
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid #333;
+}
+.anime-card a.btn {
+    display: block;
+    text-align: center;
+    margin: 10px;
+    padding: 8px;
+    background-color: #ff6f61;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.anime-card a.btn:hover { background-color: #ff8576; }
 
 /* ======== Forms ======== */
 form {
-    background-color: #2b2b3f;
-    padding: 20px;
+    background-color: #161b22;
+    padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     margin-bottom: 20px;
 }
 form input[type="text"],
 form input[type="password"],
 form input[type="file"] {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin: 10px 0;
     border-radius: 8px;
     border: none;
     outline: none;
+    background-color: #0d1117;
+    color: #c9d1d9;
 }
+form input::placeholder { color: #8b949e; }
 form button {
+    width: 100%;
     background-color: #ff6f61;
     border: none;
-    padding: 10px 20px;
+    padding: 12px;
     color: #fff;
     font-weight: bold;
     border-radius: 8px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: 0.3s;
 }
-form button:hover {
-    background-color: #ff8576;
-}
+form button:hover { background-color: #ff8576; }
 
 /* ======== Tables (Admin) ======== */
 table {
@@ -98,11 +113,11 @@ table {
 }
 th, td {
     padding: 12px;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid #333;
     text-align: center;
 }
-th { background-color: #2b2b3f; color: #ff6f61; }
-td { background-color: #1e1e2f; }
+th { background-color: #1f2937; color: #ff6f61; }
+td { background-color: #161b22; }
 td a {
     color: #ff6f61;
     text-decoration: none;
@@ -125,7 +140,16 @@ td a:hover { text-decoration: underline; }
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #2b2b3f;
+    background-color: #1f2937;
     margin-top: 40px;
-    color: #aaa;
+    color: #8b949e;
+}
+
+/* ======== Responsive ======== */
+@media(max-width:768px){
+    .anime-grid { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width:480px){
+    .anime-grid { grid-template-columns: 1fr; }
+    nav a { display: block; margin: 5px 0; }
 }

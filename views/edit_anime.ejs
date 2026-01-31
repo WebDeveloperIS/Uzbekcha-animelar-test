@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Edit Anime</title>
 <link rel="stylesheet" href="/public/style.css">
-
 </head>
 <body>
 <header>
@@ -17,18 +16,12 @@
 </header>
 
 <div class="container">
-  <form action="/admin/edit/<%= anime.id %>" method="POST" enctype="multipart/form-data">
-    <label for="title">Title:</label>
-    <input type="text" name="title" id="title" value="<%= anime.title %>" required>
-
-    <label for="video">Upload New Video (optional):</label>
-    <input type="file" name="video" id="video" accept="video/*">
-
-    <label for="youtube">Or YouTube URL:</label>
-    <input type="text" name="youtube" id="youtube" placeholder="https://www.youtube.com/..." value="<%= anime.video && anime.video.startsWith('http') ? anime.video : '' %>">
-
-    <button type="submit">Save Changes</button>
-  </form>
+<form action="/admin/edit/<%= anime.id %>" method="POST" enctype="multipart/form-data">
+  <input type="text" name="title" value="<%= anime.title %>" required>
+  <input type="file" name="video" accept="video/*">
+  <input type="text" name="youtube" placeholder="YouTube URL" value="<%= anime.video && anime.video.startsWith('http') ? anime.video : '' %>">
+  <button type="submit">Save Changes</button>
+</form>
 </div>
 
 <footer>
