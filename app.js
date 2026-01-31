@@ -32,7 +32,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-app.post("/upload", upload.single("video"), (req, res) => {
+app.post("/uploads", upload.single("video"), (req, res) => {
   res.redirect("/");
 });
 
