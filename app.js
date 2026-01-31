@@ -20,16 +20,15 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// Multer storage
+// Multer setup
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "public/uploads")); // uploads papka
+    cb(null, path.join(__dirname, "public/uploads"));
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + path.extname(file.originalname));
   }
 });
-
 const upload = multer({ storage });
 
 // Middleware
@@ -37,24 +36,22 @@ function checkAuth(req, res, next) {
     if (req.session.user) next(); 
     else res.redirect('/login'); 
 }
-
 function checkAdmin(req, res, next) { 
     if (req.session.user && req.session.user.role === 'admin') next(); 
     else res.redirect('/login'); 
 }
 
-// Register
+// ================= Register & Login =================
 app.get('/register', (req, res) => res.render('register', { error: null }));
 app.post('/register', (req, res) => {
     const { username, password } = req.body;
     const hash = bcrypt.hashSync(password, 10);
-    db.run("INSERT INTO users (username,password) VALUES (?,?)", [username, hash], (err) => {
+    db.run("INSERT INTO users (username,password,role) VALUES (?,?,?)", [username, hash, 'user'], (err) => {
         if (err) res.render('register', { error: 'Username mavjud' });
         else res.redirect('/login');
     });
 });
 
-// Login
 app.get('/login', (req, res) => res.render('login', { error: null }));
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
@@ -67,13 +64,12 @@ app.post('/login', (req, res) => {
     });
 });
 
-// Logout
 app.get('/logout', (req, res) => { 
     req.session.destroy(); 
     res.redirect('/login'); 
 });
 
-// Foydalanuvchi sahifa
+// ================= Foydalanuvchi sahifa =================
 app.get('/', checkAuth, (req, res) => {
     const search = req.query.search || '';
     db.all("SELECT * FROM animes WHERE title LIKE ? ORDER BY created_at DESC", ['%' + search + '%'], (err, rows) => {
@@ -81,7 +77,7 @@ app.get('/', checkAuth, (req, res) => {
     });
 });
 
-// Admin routes
+// ================= Admin panel =================
 app.get('/admin', checkAdmin, (req, res) => {
     db.all("SELECT * FROM animes ORDER BY created_at DESC", [], (err, rows) => res.render('admin', { animes: rows }));
 });
@@ -97,7 +93,6 @@ app.get('/admin/edit/:id', checkAdmin, (req, res) => {
     const id = req.params.id;
     db.get("SELECT * FROM animes WHERE id=?", [id], (err, row) => res.render('edit_anime', { anime: row }));
 });
-
 app.post('/admin/edit/:id', checkAdmin, upload.single('video'), (req, res) => {
     const id = req.params.id;
     const title = req.body.title;
@@ -118,9 +113,7 @@ app.get('/admin/delete/:id', checkAdmin, (req, res) => {
     db.run("DELETE FROM animes WHERE id=?", [id], () => res.redirect('/admin'));
 });
 
-// Bu route olib tashlandi, / endpoint yuqorida mavjud
-// app.get("/", (req, res) => { res.render("index"); });
-
+// ================= Start Server =================
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log("Server running on port " + PORT);

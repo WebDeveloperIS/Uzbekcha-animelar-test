@@ -1,47 +1,31 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Admin Panel</title>
-    <link rel="stylesheet" href="/style.css">
+  <title>Admin panel</title>
 </head>
-
 <body>
-    <nav>
-        <div><a href="/">Uzbekcha Animelar</a></div>
-        <div>
-            <a href="/admin/add">Anime Qo‘shish</a>
-            <a href="/logout">Logout</a>
-        </div>
-    </nav>
-
-    <h2>Admin Panel</h2>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Video</th>
-            <th>Actions</th>
-        </tr>
-        <% animes.forEach(a=>{ %>
-            <tr>
-                <td>
-                    <%= a.id %>
-                </td>
-                <td>
-                    <%= a.title %>
-                </td>
-                <td>
-                    <%= a.video %>
-                </td>
-                <td>
-                    <a href="/admin/edit/<%= a.id %>">Tahrirlash</a> |
-                    <a href="/admin/delete/<%= a.id %>"
-                        onclick="return confirm('O‘chirishni xohlaysizmi?')">O‘chirish</a>
-                </td>
-            </tr>
-            <% }) %>
-    </table>
+<h1>Admin Panel</h1>
+<a href="/admin/add">Add Anime</a> | <a href="/">Home</a> | <a href="/logout">Logout</a>
+<table border="1">
+<tr><th>Title</th><th>Video</th><th>Actions</th></tr>
+<% animes.forEach(a => { %>
+<tr>
+  <td><%= a.title %></td>
+  <td>
+    <% if(a.video && !a.video.startsWith('http')) { %>
+      <video width="150" controls>
+        <source src="/uploads/<%= a.video %>" type="video/mp4">
+      </video>
+    <% } else if(a.video) { %>
+      <a href="<%= a.video %>">YouTube link</a>
+    <% } %>
+  </td>
+  <td>
+    <a href="/admin/edit/<%= a.id %>">Edit</a> |
+    <a href="/admin/delete/<%= a.id %>" onclick="return confirm('Are you sure?')">Delete</a>
+  </td>
+</tr>
+<% }) %>
+</table>
 </body>
-
 </html>
