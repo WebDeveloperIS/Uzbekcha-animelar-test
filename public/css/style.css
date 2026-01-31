@@ -40,7 +40,7 @@ nav a:hover {
 
 /* ===== Container ===== */
 .container {
-    max-width: 50%;
+    max-width: 1200px;
     margin: 20px auto;
     padding: 0 20px;
 }
@@ -101,6 +101,7 @@ form {
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
     margin-bottom: 20px;
+
 }
 
 form input[type="text"],
@@ -208,4 +209,9 @@ footer {
         display: block;
         margin: 5px 0;
     }
+}
+.cf{
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
