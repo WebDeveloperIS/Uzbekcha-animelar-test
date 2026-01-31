@@ -1,47 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anime Hub</title>
-<link rel="stylesheet" href="/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Hub</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
 
-<header>
-  <h1>Anime Hub</h1>
-  <nav>
-    <a href="/">Home</a>
-    <% if(user && user.role==='admin'){ %><a href="/admin" class="btn">Admin</a><% } %>
-    <% if(user){ %><a href="/logout" class="btn">Logout</a><% } else { %><a href="/login" class="btn">Login</a><% } %>
-  </nav>
-</header>
+    <header>
+        <h1>Anime Hub</h1>
+        <nav>
+            <a href="/">Home</a>
+            <% if(user && user.role==='admin' ){ %><a href="/admin" class="btn">Admin</a>
+                <% } %>
+                    <% if(user){ %><a href="/logout" class="btn">Logout</a>
+                        <% } else { %><a href="/login" class="btn">Login</a>
+                            <% } %>
+        </nav>
+    </header>
 
-<div class="container">
-  <form method="GET" action="/">
-    <input type="text" name="search" value="<%= search %>" placeholder="Search anime...">
-    <button type="submit">Search</button>
-  </form>
+    <div class="container">
+        <form method="GET" action="/">
+            <div class="cf">
+                <div class="cf-in">
+                    <input type="text" name="search" value="<%= search %>" placeholder="Search anime...">
+                    <button type="submit">Search</button>
+                </div>
+            </div>
+        </form>
 
-  <div class="anime-grid">
-    <% animes.forEach(a => { %>
-      <div class="anime-card">
-        <h3><%= a.title %></h3>
-        <% if(a.video && !a.video.startsWith('http')){ %>
-          <video controls>
-            <source src="/uploads/<%= a.video %>" type="video/mp4">
-          </video>
-        <% } else if(a.video){ %>
-          <a href="<%= a.video %>" class="btn">YouTube Link</a>
-        <% } %>
-      </div>
-    <% }) %>
-  </div>
-</div>
+        <div class="anime-grid">
+            <% animes.forEach(a=> { %>
+                <div class="anime-card">
+                    <h3>
+                        <%= a.title %>
+                    </h3>
+                    <% if(a.video && !a.video.startsWith('http')){ %>
+                        <video controls>
+                            <source src="/uploads/<%= a.video %>" type="video/mp4">
+                        </video>
+                        <% } else if(a.video){ %>
+                            <a href="<%= a.video %>" class="btn">YouTube Link</a>
+                            <% } %>
+                </div>
+                <% }) %>
+        </div>
+    </div>
 
-<footer>
-  &copy; 2026 Anime Hub. All rights reserved.
-</footer>
+    <footer>
+        &copy; 2026 Anime Hub. All rights reserved.
+    </footer>
 
 </body>
+
 </html>
