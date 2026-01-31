@@ -97,5 +97,11 @@ app.get('/admin/delete/:id',checkAdmin,(req,res)=>{
     const id=req.params.id;
     db.run("DELETE FROM animes WHERE id=?",[id],()=>res.redirect('/admin'));
 });
+app.get("/", (req, res) => {
+  res.render("index"); // yoki res.send("OK")
+});
 
-app.listen(3000,()=>console.log("Server 3000-portda ishga tushdi"));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("Server running on port " + PORT);
+});
