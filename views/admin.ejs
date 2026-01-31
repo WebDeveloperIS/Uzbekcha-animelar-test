@@ -1,12 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Admin panel</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel</title>
+<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<h1>Admin Panel</h1>
-<a href="/admin/add">Add Anime</a> | <a href="/">Home</a> | <a href="/logout">Logout</a>
-<table border="1">
+<header>
+  <h1>Admin Panel</h1>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/admin/add" class="btn">Add Anime</a>
+    <a href="/logout">Logout</a>
+  </nav>
+</header>
+
+<div class="container">
+<table>
 <tr><th>Title</th><th>Video</th><th>Actions</th></tr>
 <% animes.forEach(a => { %>
 <tr>
@@ -17,15 +28,20 @@
         <source src="/uploads/<%= a.video %>" type="video/mp4">
       </video>
     <% } else if(a.video) { %>
-      <a href="<%= a.video %>">YouTube link</a>
+      <a href="<%= a.video %>" class="btn">YouTube Link</a>
     <% } %>
   </td>
   <td>
-    <a href="/admin/edit/<%= a.id %>">Edit</a> |
-    <a href="/admin/delete/<%= a.id %>" onclick="return confirm('Are you sure?')">Delete</a>
+    <a href="/admin/edit/<%= a.id %>" class="btn">Edit</a>
+    <a href="/admin/delete/<%= a.id %>" class="btn" onclick="return confirm('Are you sure?')">Delete</a>
   </td>
 </tr>
 <% }) %>
 </table>
+</div>
+
+<footer>
+  &copy; 2026 Anime Hub. All rights reserved.
+</footer>
 </body>
 </html>

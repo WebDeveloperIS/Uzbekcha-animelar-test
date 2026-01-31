@@ -1,16 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Add Anime</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Anime</title>
+<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<h1>Add Anime</h1>
-<form action="/admin/add" method="POST" enctype="multipart/form-data">
-  <input type="text" name="title" placeholder="Title" required><br>
-  <input type="file" name="video"><br>
-  <input type="text" name="youtube" placeholder="YouTube URL"><br>
-  <button type="submit">Add</button>
-</form>
-<a href="/admin">Back</a>
+<header>
+  <h1>Add Anime</h1>
+  <nav>
+    <a href="/admin" class="btn">Back to Admin</a>
+    <a href="/logout" class="btn">Logout</a>
+  </nav>
+</header>
+
+<div class="container">
+  <form action="/admin/add" method="POST" enctype="multipart/form-data">
+    <label for="title">Title:</label>
+    <input type="text" name="title" id="title" placeholder="Enter anime title" required>
+
+    <label for="video">Upload Video (optional):</label>
+    <input type="file" name="video" id="video" accept="video/*">
+
+    <label for="youtube">Or YouTube URL:</label>
+    <input type="text" name="youtube" id="youtube" placeholder="https://www.youtube.com/...">
+
+    <button type="submit">Add Anime</button>
+  </form>
+</div>
+
+<footer>
+  &copy; 2026 Anime Hub. All rights reserved.
+</footer>
 </body>
 </html>

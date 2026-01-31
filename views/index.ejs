@@ -1,32 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Anime Sayt</title>
-  <link rel="stylesheet" href="/css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anime Sayt</title>
+<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<h1>Salom, <%= user.username %>!</h1>
-<a href="/logout">Logout</a>
-<form method="GET" action="/">
-  <input type="text" name="search" value="<%= search %>" placeholder="Search anime">
-  <button type="submit">Search</button>
-</form>
-<ul>
-  <% animes.forEach(a => { %>
-    <li>
-      <strong><%= a.title %></strong><br>
-      <% if(a.video && !a.video.startsWith('http')) { %>
-        <video width="300" controls>
-          <source src="/uploads/<%= a.video %>" type="video/mp4">
-        </video>
-      <% } else if(a.video) { %>
-        <a href="<%= a.video %>">YouTube link</a>
-      <% } %>
-    </li>
-  <% }) %>
-</ul>
-<% if(user.role === 'admin') { %>
-  <a href="/admin">Admin panel</a>
-<% } %>
+<header>
+  <h1>Anime Hub</h1>
+  <nav>
+    <a href="/">Home</a>
+    <% if(user.role === 'admin') { %>
+      <a href="/admin">Admin</a>
+    <% } %>
+    <a href="/logout">Logout</a>
+  </nav>
+</header>
+
+<div class="container">
+  <form method="GET" action="/">
+    <input type="text" name="search" value="<%= search %>" placeholder="Search anime...">
+    <button type="submit">Search</button>
+  </form>
+
+  <div class="anime-grid">
+    <% animes.forEach(a => { %>
+      <div class="anime-card">
+        <h3><%= a.title %></h3>
+        <% if(a.video && !a.video.startsWith('http')) { %>
+          <video width="100%" controls>
+            <source src="/uploads/<%= a.video %>" type="video/mp4">
+          </video>
+        <% } else if(a.video) { %>
+          <a href="<%= a.video %>" class="btn">YouTube Link</a>
+        <% } %>
+      </div>
+    <% }) %>
+  </div>
+</div>
+
+<footer>
+  &copy; 2026 Anime Hub. All rights reserved.
+</footer>
 </body>
 </html>
